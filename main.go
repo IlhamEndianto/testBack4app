@@ -18,11 +18,12 @@ func main() {
 	r.HandleFunc("/users/{id}", readUserHandler).Methods(http.MethodGet)
 	r.HandleFunc("/users/{id}", updateUserHandler).Methods(http.MethodPut)
 	r.HandleFunc("/users/{id}", deleteUserHandler).Methods(http.MethodDelete)
-
+	log.Println("Starting service")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
 func createUserHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("Create Request received")
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
@@ -44,6 +45,7 @@ func createUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func readUserHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("Read Request received")
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
@@ -71,6 +73,7 @@ func readUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func updateUserHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("Update Request received")
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
@@ -92,6 +95,7 @@ func updateUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteUserHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("Delete Request received")
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
